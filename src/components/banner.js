@@ -13,11 +13,17 @@ export class Banner extends React.Component {
   showBanner(message, success = true) {
     this.success = success;
     this.message = message;
-    clearInterval(this.hideTimer);
-    this.hideTimer = setInterval(() => {
+    clearTimeout(this.hideTimer);
+    if (this.state.show) {
+      this.setState({ show: false });
+      clearTimeout(this.showTimer);
+      this.showTimer = setTimeout(() => this.setState({ show: true }), 200);
+    } else {
+      this.setState({ show: true });
+    }
+    this.hideTimer = setTimeout(() => {
       this.setState({ show: false });
     }, 2000);
-    this.setState({ show: true });
   }
 
   render() {

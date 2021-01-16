@@ -1,6 +1,6 @@
 import React from "react";
 import { CardWithList } from "./card-with-list";
-
+let maxNominationTimer;
 export function Nominations({ searchText, movieResult, bannerRef }) {
   let [nomination, setNomination] = React.useState([]);
   function addNomination(movie) {
@@ -13,6 +13,12 @@ export function Nominations({ searchText, movieResult, bannerRef }) {
       return;
     }
     showBanner("You have successfully nominate this movie.");
+    if (nomination.length >= 4) {
+      clearTimeout(maxNominationTimer);
+      maxNominationTimer = setTimeout(() => {
+        showBanner("You have reached the maximum amount of nominations.");
+      }, 1000);
+    }
     setNomination(nomination.concat([movie]));
   }
   function removeNomination(movie) {

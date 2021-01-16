@@ -33,7 +33,9 @@ export function CardWithList({
     );
     return (
       <li key={key} className="relative py-2 px-2 rounded hover:bg-gray-100">
-        {listItem}
+        <div className="inline-block w-1/4 sm:w-1/3 lg:w-1/2 xl:w-3/5">
+          {listItem}
+        </div>
         {btn}
       </li>
     );
@@ -45,7 +47,7 @@ export function CardWithList({
     listComp = React.createElement(
       ordered ? "ol" : "ul",
       {
-        className: `ml-5 list-inside ${ordered ? "list-decimal" : "list-disc"}`,
+        className: `ml-5 list-inside ${ordered && "list-decimal"}`,
       },
       list
     );

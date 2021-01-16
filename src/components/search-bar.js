@@ -7,13 +7,14 @@ export function SearchBar({
   noPlaceholder = false,
   onInput,
   inputKey,
+  className,
 }) {
   return (
-    <>
+    <div className={className}>
       <label className="text-sm" htmlFor={inputKey}>
         {header}
       </label>
-      <div className="flex flex-row border py-1 px-3 rounded focus-within:ring">
+      <div className="flex flex-row border p-input rounded focus-within:ring">
         <FontAwesomeIcon icon={faSearch} className="self-center" />
         <input
           className="ml-3 focus:outline-none w-full"
@@ -22,6 +23,6 @@ export function SearchBar({
           id={inputKey}
         />
       </div>
-    </>
+    </div>
   );
 }

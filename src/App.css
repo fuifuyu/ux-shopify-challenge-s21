@@ -13,3 +13,7 @@
 .card-header {
   @apply font-medium mb-6;
 }
+
+.p-input {
+  @apply py-1 px-3;
+}
