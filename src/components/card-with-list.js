@@ -31,7 +31,6 @@ export function CardWithList({
       },
       button.text
     );
-    console.log(index % 2);
     return (
       <li key={key} className="relative py-2 px-2 rounded hover:bg-gray-100">
         {listItem}

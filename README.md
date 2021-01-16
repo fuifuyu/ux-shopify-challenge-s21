@@ -14,6 +14,16 @@ The UI is created according to the mockup from the technical requirement. Improv
 
 # Components explaination:
 
+## Nominations
+
+Contain two card that hold a list of the searched movie and a list of the user's nomination
+Parameter:
+| Name | Description | Type |
+| -----:|-----:| -----:|-----:|-----:|
+| searchText | The query text to display | string |
+| movieResult | The list of searched movie | [] |
+| bannerRef | The reference to the banner that shows up when add/remove movies. | RefObject |
+
 ## Card With List
 
 A card with a list and button beside each row.
