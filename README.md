@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# The Shoppies: Movie awards for entrepreneurs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The UI is created according to the mockup from the technical requirement. Improved some of the design to make it more readable, but retained the original vibe.
 
-## Available Scripts
+## Assumption made:
 
-In the project directory, you can run:
+- If the query is less than 3 letters, the search API doesn't get call until the user finish typing (No new character in 200ms)
+- The result list will show 10 items at a time
+- The height of the result list will depends on the length of the list
 
-### `npm start`
+## Extra feature/design added:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Components explaination:
 
-### `npm test`
+## Card With List
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A card with a list and button beside each row.
+Parameter:
+| Name | Description | Type |
+| -----:|-----:| -----:|-----:|-----:|
+| title | The header of the card | string |
+| ordered | Use a bullet or number list. | bool |
+| content | The list of item that goes into the list | []<T> |
+| button | Information of the button beside each row in the list | {text,onClick:(T)=>void} |
+| className | Class of the card | string |
+| emptyMessage | The message to show when there is no item in the list | string |
+| contentFactory | A function that convert the list item into keys and label | (item:T)=>{key:string,listItem} |
+| disableContent | Disable the button if the item is in this list | [] |
+| disableAll | Disable all the button in the list | bool |
+\*\* If contentFactory is not provided, content must be a list of string.
 
-### `npm run build`
+## Search Bar
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A search bar with a search icon besides it.
+| Name | Description | Type |
+| -----:|-----:| -----:|-----:|-----:|
+| header | The label of the input textbox | string |
+| placeholder | The placeholder of the textbox. When not provided, header will be used instead. | string |
+| noPlaceholder | Don't use anything as the placeholder | bool |
+| onInput | Textbox onInput function | (HtmlEvent)=>void |
+| inputKey | Unique id for the dom element of the input textbox. | string |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Banner
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+A animated banner that slides in and exit from above. It will automatically disappear after being shown.
+Usage: <Banner ref={ref}/>
+ref.current.showBanner(message,success);
+| Name | Description | Type |
+| -----:|-----:| -----:|-----:|-----:|
+| message | The message in the banner | string |
+| success | Show a success (green) or warning (red) banner | bool (default:true) |

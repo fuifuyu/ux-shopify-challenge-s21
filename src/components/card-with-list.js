@@ -18,7 +18,9 @@ export function CardWithList({
     let btn = React.createElement(
       "button",
       {
-        className: `ml-2 btn-grey ${button.class ?? ""}`,
+        className: `float-right btn-grey align-top leading-none ${
+          button.class ?? ""
+        }`,
         onClick: () => button.onClick(c),
         disabled:
           disableAll ||
@@ -29,15 +31,17 @@ export function CardWithList({
       },
       button.text
     );
+    console.log(index % 2);
     return (
-      <li key={key} className="my-2">
+      <li key={key} className="relative py-2 px-2 rounded hover:bg-gray-100">
         {listItem}
         {btn}
       </li>
     );
   });
   let listComp;
-  if (content?.length == 0) listComp = emptyMessage;
+  if (content?.length == 0)
+    listComp = <div className="text-gray-400 text-center">{emptyMessage}</div>;
   else
     listComp = React.createElement(
       ordered ? "ol" : "ul",
@@ -47,7 +51,7 @@ export function CardWithList({
       list
     );
   return (
-    <div className={`card ${className}`}>
+    <div className={`card ${className ?? ""}`}>
       <div className="card-header">{title}</div>
       {listComp}
     </div>

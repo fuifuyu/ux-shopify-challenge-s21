@@ -24,20 +24,23 @@ function App() {
     if (title.length == 0) setMovieResult(emptyQueryResult);
     clearTimeout(timer);
     if (title.length > 3) {
-      updateMovieList(title);
-    } else timer = setTimeout(() => updateMovieList(title), 300);
+      getMovieResult(title).then((res) => setMovieResult(res));
+    } else
+      timer = setTimeout(
+        () => getMovieResult(title).then((res) => setMovieResult(res)),
+        300
+      );
   }
-  function updateMovieList(title) {
+  async function getMovieResult(title) {
     const url = `http://www.omdbapi.com/?apikey=2c9d4bc7&s=${title}`;
-    fetch(url, { method: "GET" }).then((res) =>
-      res.json().then((json) => {
-        if (json.Error && json.Error != movieResult.Error) {
-          if (json.Error == "Incorrect IMDb ID.")
-            json.Error = emptyQueryResult.Error;
-          setMovieResult(json);
-        } else if (json.Response) setMovieResult(json);
-      })
-    );
+    let res = await fetch(url, { method: "GET" });
+    let json = await res.json();
+    if (json.Error && json.Error != movieResult.Error) {
+      if (json.Error == "Incorrect IMDb ID.")
+        json.Error = emptyQueryResult.Error;
+      return json;
+    } else if (json.Response) return json;
+    return movieResult;
   }
   function addNomination(movie) {
     if (nomination.length >= 5) {
@@ -87,7 +90,9 @@ function App() {
           title="Nominations"
           button={{ text: "Remove", onClick: removeNomination }}
           content={nomination}
+          ordered={true}
           contentFactory={movieToContent}
+          emptyMessage="No movie is added."
         />
       </div>
       <Banner ref={bannerRef} />
